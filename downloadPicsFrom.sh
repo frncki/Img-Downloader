@@ -20,20 +20,26 @@ then
 
     for img in $imgUrls #iterate through every link in imgUrls
     do
-    fileName="`echo $img | grep -oE $regexGetFileName`" #uses regexGetFileName for getting name of file to download
-    if [[ "$img" =~ ^\/\/.+ ]] #if file link is absolute but starts with only "//" without "https:"
-    then
-        curl "https:$img" -o ./$fileName -s #download file from given link with added "https:"
-    elif [[ "$img" =~ ^https.+ ]] #else if file link is absolute and full
-    then
-        curl $img -o ./$fileName -s #download file
-    elif [[ "$img" =~ ^\/[^\/].+ ]] #else if file link is relative
-    then
-        baseURL="`echo $url | grep -oE $regexGetURLBase`" #get website URL base
-        curl "$baseURL$img" -o ./$fileName -s #download file by merging website URL base and relative file link, which makes file link absolute
-    fi
+        fileName="`echo $img | grep -oE $regexGetFileName`" #uses regexGetFileName for getting name of file to download
+        if [[ "$img" =~ ^\/\/.+ ]] #if file link is absolute but starts with only "//" without "https:"
+        then
+            echo "Downloading..."
+            curl "https:$img" -o ./$fileName -s #download file from given link with added "https:"
+            echo "SUCCESS! Downloaded file: $fileName"
+        elif [[ "$img" =~ ^https.+ ]] #else if file link is absolute and full
+        then
+            echo "Downloading..."
+            curl $img -o ./$fileName -s #download file
+            echo "SUCCESS! Downloaded file: $fileName"
+        elif [[ "$img" =~ ^\/[^\/].+ ]] #else if file link is relative
+        then
+            baseURL="`echo $url | grep -oE $regexGetURLBase`" #get website URL base
+            echo "Downloading..."
+            curl "$baseURL$img" -o ./$fileName -s #download file by merging website URL base and relative file link, which makes file link absolute
+            echo "SUCCESS! Downloaded file: $fileName"
+        fi
     done
 
     rm ./.website #remove the temporary file
-    exit 0 # exit with status 0 (success)
+        exit 0 # exit with status 0 (success)
 fi
