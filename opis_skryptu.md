@@ -2,7 +2,7 @@
 1. Skrypt działa w bashowym terminalu
 2. Należy upewnić się, że ma się zainstalowanego [`curla`](https://curl.haxx.se/download.html "Pobierz curl!")
 3. W folderze, w którym znajduje się plik ze skryptem `downloadPicsFrom.sh` należy w terminalu wpisać komendę: `$ chmod 755 downloadPicsFrom.sh`, która nadaje odpowiednie uprawnienia do zapisu, odczytu i wykonania
-4. Skrypt pobiera obrazy do podfolderu o nazwie images-\[aktualna data\]
+4. Skrypt pobiera obrazy do podfolderu o nazwie `images-[aktualna data]`
 
 ```bash
 #!/bin/bash
